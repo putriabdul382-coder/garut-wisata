@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>YUDA NEWS - Wisata Garut Pride (Full Version)</title>
+    <style>
+        :root { --p: #bc13fe; --text: #222; --bg: #ffffff; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; }
+        nav { background: #fff; padding: 15px 5%; border-bottom: 3px solid var(--p); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top:0; z-index: 100; }
+        nav h1 { color: var(--p); margin: 0; cursor: pointer; font-size: 24px; font-weight: 800; }
+        .search-container { text-align: center; padding: 40px 5%; background: linear-gradient(135deg, #f8f8f8 0%, #ececec 100%); border-bottom: 1px solid #ddd; }
+        #searchInput { padding: 15px 25px; width: 80%; max-width: 600px; border: 2px solid #ddd; border-radius: 30px; outline: none; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 30px 5%; }
+        .news-card { background: #fff; border-radius: 15px; overflow: hidden; border: 1px solid #eee; transition: 0.4s; cursor: pointer; }
+        .news-card:hover { transform: translateY(-10px); border-color: var(--p); box-shadow: 0 10px 30px rgba(188, 19, 254, 0.15); }
+        .news-img { width: 100%; height: 220px; object-fit: cover; }
+        .news-content { padding: 20px; }
+        .badge { background: #f0e6ff; color: var(--p); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        #fullArticle { display: none; padding: 40px 10%; max-width: 900px; margin: auto; }
+        .btn-back { background: var(--p); color: #fff; border: none; padding: 12px 25px; border-radius: 30px; cursor: pointer; margin-bottom: 30px; font-weight: bold; }
+        .main-img { width: 100%; border-radius: 20px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .map-box { background: #f9f9f9; padding: 25px; border-radius: 15px; border: 1px solid #ddd; margin-top: 40px; }
+        .map-link { display: inline-block; background: #25d366; color: #fff; padding: 12px 25px; border-radius: 10px; text-decoration: none; margin-top: 15px; font-weight: bold; }
+        footer { text-align: center; padding: 50px; background: #111; color: #888; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+<nav><h1 onclick="tampilkanHome()">YUDA NEWS - GARUT PRIDE</h1></nav>
+
+<div id="homePage">
+    <div class="search-container">
+        <h1>Mau ke mana di Garut, Bos?</h1>
+        <input type="text" id="searchInput" onkeyup="cariBerita()" placeholder="Cari: Pantai, Gunung, Danau, atau Kopi...">
+    </div>
+    <div class="container" id="newsGrid"></div>
+</div>
+
+<div id="fullArticle">
+    <button class="btn-back" onclick="tampilkanHome()">← BALIK KE MENU</button>
+    <div id="isiBerita"></div>
+</div>
+
+<footer>
+    <b>DIKELOLA OLEH: YUDA YUDIANSYAH ASAL GARUT</b><br>
+    © 2026 - Media Informasi Terbesar di Garut
+</footer>
+
+<script>
+    const databaseBerita = [
+        { id: 'papandayan', judul: "Kawah Papandayan & Hutan Mati", kategori: "Gunung", gambar: "https://images.unsplash.com/photo-1596395819057-e37f55a85199?w=600", isi: "Gunung Papandayan memiliki pesona alam luar biasa dengan kawah belerang yang aktif dan hutan mati yang sangat estetik untuk fotografi.", maps: "https://www.google.com/maps/search/Kawah+Papandayan" },
+        { id: 'santolo', judul: "Pantai Santolo: Mutiara Selatan", kategori: "Pantai", gambar: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600", isi: "Pantai dengan pasir putih dan jembatan tua yang ikonik. Pusatnya ikan laut segar di Garut!", maps: "https://www.google.com/maps/search/Pantai+Santolo" },
+        { id: 'darajat', judul: "Darajat Pass: Waterboom Awan", kategori: "Pemandian", gambar: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600", isi: "Sensasi berenang air hangat di ketinggian dengan uap kawah asli. Udara dingin, air panas!", maps: "https://www.google.com/maps/search/Darajat+Pass" },
+        { id: 'bagendit', judul: "Situ Bagendit New Look 2026", kategori: "Danau", gambar: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600", isi: "Danau yang sudah direvitalisasi total. Ada menara pandang dan rakit naga yang modern.", maps: "https://www.google.com/maps/search/Situ+Bagendit" },
+        { id: 'heulang', judul: "Pantai Sayang Heulang", kategori: "Pantai", gambar: "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600", isi: "Terkenal dengan gumuk pasir ala Sahara dan pantai yang luas. Sangat cocok untuk camping.", maps: "https://www.google.com/maps/search/Sayang+Heulang" },
+        { id: 'mawar', judul: "Kebun Mawar Situhapa", kategori: "Taman", gambar: "https://images.unsplash.com/photo-1496062031456-07b8f162a322?w=600", isi: "Taman bunga mawar terbesar di Garut dengan penginapan bergaya Inggris. Suasana sangat romantis.", maps: "https://www.google.com/maps/search/Kebun+Mawar+Situhapa" },
+        { id: 'tonjong', judul: "Leuwi Tonjong: Grand Canyon Garut", kategori: "Sungai", gambar: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600", isi: "Aliran sungai di antara dua tebing tinggi yang megah. Airnya jernih dan sangat tenang.", maps: "https://www.google.com/maps/search/Leuwi+Tonjong" },
+        { id: 'karacak', judul: "Karacak Valley: Pinus & Air Terjun", kategori: "Hutan", gambar: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=600", isi: "Hutan pinus di tengah kota Garut. Ada air terjun Curug Ngebul yang segar di dalamnya.", maps: "https://www.google.com/maps/search/Karacak+Valley" },
+        { id: 'cipanas', judul: "Cipanas: Legenda Air Panas", kategori: "Pemandian", gambar: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600", isi: "Pemandian air panas paling tua dan lengkap fasilitasnya. Dekat dari pusat kota Garut.", maps: "https://www.google.com/maps/search/Cipanas+Garut" },
+        { id: 'kamojang', judul: "Kawah Kamojang: Geothermal Garut", kategori: "Kawah", gambar: "https://images.unsplash.com/photo-1541167760496-1628856ab772?w=600", isi: "Kawah unik yang mengeluarkan uap panas bertekanan tinggi. Ada terapi uap alami di sini.", maps: "https://www.google.com/maps/search/Kawah+Kamojang" },
+        { id: 'cangkuang', judul: "Candi Cangkuang: Wisata Sejarah", kategori: "Sejarah", gambar: "https://images.unsplash.com/photo-1590059002624-6593099a6d28?w=600", isi: "Satu-satunya candi di Jawa Barat yang berada di tengah danau. Harus naik rakit untuk ke sana.", maps: "https://www.google.com/maps/search/Candi+Cangkuang" }
+    ];
+
+    function renderGrid(data) {
+        const grid = document.getElementById('newsGrid');
+        grid.innerHTML = '';
+        data.forEach(item => {
+            grid.innerHTML += `
+                <div class="news-card" onclick="bacaBerita('${item.id}')">
+                    <img src="${item.gambar}" class="news-img">
+                    <div class="news-content">
+                        <span class="badge">${item.kategori}</span>
+                        <h3>${item.judul}</h3>
+                        <p>${item.isi.substring(0, 60)}...</p>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function cariBerita() {
+        const keyword = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = databaseBerita.filter(b => b.judul.toLowerCase().includes(keyword) || b.kategori.toLowerCase().includes(keyword));
+        renderGrid(filtered);
+    }
+
+    function bacaBerita(id) {
+        const data = databaseBerita.find(b => b.id === id);
+        document.getElementById('homePage').style.display = 'none';
+        document.getElementById('fullArticle').style.display = 'block';
+        document.getElementById('isiBerita').innerHTML = `
+            <span class="badge">${data.kategori}</span>
+            <h1 style="margin-top:15px">${data.judul}</h1>
+            <img src="${data.gambar}" class="main-img">
+            <div style="font-size:18px; line-height:1.8">${data.isi}</div>
+            <div class="map-box">
+                <h4>📍 Navigasi Google Maps:</h4>
+                <p>Klik tombol di bawah untuk panduan rute perjalanan ke lokasi ini.</p>
+                <a href="${data.maps}" target="_blank" class="map-link">BUKA GOOGLE MAPS →</a>
+            </div>
+        `;
+        window.scrollTo(0,0);
+    }
+
+    function tampilkanHome() {
+        document.getElementById('homePage').style.display = 'block';
+        document.getElementById('fullArticle').style.display = 'none';
+    }
+
+    renderGrid(databaseBerita);
+</script>
+
+</body>
+</html>
