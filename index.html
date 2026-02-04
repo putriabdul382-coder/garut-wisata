@@ -3,85 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YUDA NEWS - Portal Wisata Garut Pride</title>
-    <meta name="description" content="Informasi terupdate wisata Garut oleh Yuda Yudiansyah. Destinasi viral, kuliner, dan hidden gem asli Garut.">
+    <title>YUDA NEWS - Wisata Garut Pride</title>
     
     <meta name="google-site-verification" content="google9f1596d43de0fff2" />
     
     <style>
-        :root { --p: #bc13fe; --dark: #1a1a1a; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--bg); color: #333; line-height: 1.6; }
+        :root { --p: #bc13fe; --dark: #111; --text: #333; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f0f2f5; color: var(--text); }
         
-        /* Navigation */
-        nav { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; }
-        nav h1 { color: var(--p); margin: 0; font-size: 24px; }
-        .nav-links a { margin-left: 20px; text-decoration: none; color: #333; font-weight: 600; }
+        /* Navigasi */
+        nav { background: var(--dark); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        nav .logo { color: var(--p); font-size: 22px; font-weight: 800; }
+        nav .menu a { color: white; text-decoration: none; margin-left: 15px; font-size: 13px; font-weight: 600; }
 
-        /* Hero Section */
-        header { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1590059345033-912b4878a228?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; color: white; padding: 80px 20px; text-align: center; }
+        /* Hero */
+        header { 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://picsum.photos/id/1015/1200/400'); 
+            height: 300px; background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
+        }
+
+        .container { max-width: 1100px; margin: -40px auto 40px; padding: 0 20px; }
         
-        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        /* Grid Kartu */
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); }
         
-        /* Grid Berita */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
-        .card:hover { transform: translateY(-10px); }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
+        /* Wrapper Gambar - Biar Gak Pecah */
+        .img-container { width: 100%; height: 200px; background: #ddd; overflow: hidden; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+
         .card-body { padding: 20px; }
-        .card-body h3 { margin: 0 0 10px; color: var(--dark); }
-        
-        /* Profil Penulis */
-        .author-section { background: #fff; border-radius: 15px; padding: 30px; margin-top: 50px; display: flex; align-items: center; gap: 20px; border-left: 8px solid var(--p); }
-        .author-text h2 { margin: 0; color: var(--p); }
+        .card-body .tag { background: var(--p); color: white; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+        .card-body h3 { margin: 10px 0; font-size: 20px; }
 
-        footer { background: var(--dark); color: #fff; text-align: center; padding: 40px 20px; margin-top: 60px; }
+        /* Profil Penulis */
+        .author-box { background: var(--dark); color: white; padding: 30px; border-radius: 15px; margin-top: 40px; border-left: 6px solid var(--p); }
+        .author-box h2 { color: var(--p); margin-top: 0; }
+
+        footer { text-align: center; padding: 40px; color: #777; font-size: 13px; }
     </style>
 </head>
 <body>
 
 <nav>
-    <h1>YUDA NEWS</h1>
-    <div class="nav-links">
-        <a href="#">Beranda</a>
-        <a href="#">Wisata</a>
-        <a href="#">Tentang Kami</a>
+    <div class="logo">YUDA NEWS</div>
+    <div class="menu">
+        <a href="#">BERITA</a>
+        <a href="#">DESTINASI</a>
     </div>
 </nav>
 
 <header>
-    <h2>Jelajahi Keindahan Alam Garut</h2>
-    <p>Informasi wisata paling akurat langsung dari putra daerah Tarogong Kaler.</p>
+    <h1>GARUT PRIDE 2026</h1>
+    <p>Portal Wisata Terupdate di Tarogong Kaler</p>
 </header>
 
 <div class="container">
-    <div class="grid">
+    <div class="news-grid">
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1544921603-997577543973?auto=format&fit=crop&w=800&q=80" alt="Leuwi Kanciit">
+            <div class="img-container">
+                <img src="https://picsum.photos/id/1016/800/500" alt="Talaga Bodas">
+            </div>
             <div class="card-body">
-                <h3>Leuwi Kanciit: Hidden Gem 2026</h3>
-                <p>Sungai jernih dengan bebatuan purba yang eksotis. Wajib dikunjungi untuk pecinta alam.</p>
+                <span class="tag">VIRAL</span>
+                <h3>Pesona Talaga Bodas</h3>
+                <p>Kawah putih nan cantik yang wajib dikunjungi warga Garut.</p>
             </div>
         </div>
+
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1546872015-d7e178b54848?auto=format&fit=crop&w=800&q=80" alt="Kebun Teh">
+            <div class="img-container">
+                <img src="https://picsum.photos/id/1018/800/500" alt="Kebun Teh">
+            </div>
             <div class="card-body">
-                <h3>Sejuknya Dayeuh Manggung</h3>
-                <p>Menikmati hamparan hijau kebun teh yang berkabut. Spot foto terbaik di Garut!</p>
+                <span class="tag">REKOMENDASI</span>
+                <h3>Segarnya Kebun Teh</h3>
+                <p>Hamparan hijau yang menyejukkan mata di lereng gunung Garut.</p>
             </div>
         </div>
     </div>
 
-    <div class="author-section">
-        <div class="author-text">
-            <h2>Tentang Penulis</h2>
-            <p>Halo! Saya **YUDA YUDIANSYAH**, pemuda asli **Garut (Tarogong Kaler)**. Melalui website ini, saya ingin memajukan pariwisata daerah agar dikenal dunia. Semua informasi di sini saya kumpulkan untuk membuktikan bahwa Garut adalah "Swiss van Java" yang sesungguhnya.</p>
-        </div>
+    <div class="author-box">
+        <h2>Founder YUDA NEWS</h2>
+        <p>Saya **YUDA YUDIANSYAH**, pemuda asli **Tarogong Kaler**. Website ini adalah bukti kecintaan saya pada Garut. Mari majukan wisata lokal bersama!</p>
     </div>
 </div>
 
 <footer>
-    <p><strong>Copyright &copy; 2026 YUDA YUDIANSYAH - GARUT PRIDE</strong></p>
-    <p>Diverifikasi oleh Google Search Console</p>
+    <p>Dibuat oleh <strong>YUDA YUDIANSYAH ASAL GARUT</strong></p>
+    <p>&copy; 2026 - Terverifikasi Google Search Console</p>
 </footer>
 
 </body>
