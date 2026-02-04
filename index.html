@@ -2,99 +2,235 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YUDA NEWS - Wisata Garut Pride</title>
-    
-    <meta name="google-site-verification" content="google9f1596d43de0fff2" />
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>YUDA NEWS - PREMIUM TEMP MAIL</title>
     <style>
-        :root { --p: #bc13fe; --dark: #111; --text: #333; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f0f2f5; color: var(--text); }
+        :root { --p: #bc13fe; --dark: #000; --card: #111; --text: #fff; }
         
-        /* Navigasi */
-        nav { background: var(--dark); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        nav .logo { color: var(--p); font-size: 22px; font-weight: 800; }
-        nav .menu a { color: white; text-decoration: none; margin-left: 15px; font-size: 13px; font-weight: 600; }
+        * { box-sizing: border-box; }
 
-        /* Hero */
-        header { 
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://picsum.photos/id/1015/1200/400'); 
-            height: 300px; background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: var(--dark); 
+            color: var(--text); 
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
         }
 
-        .container { max-width: 1100px; margin: -40px auto 40px; padding: 0 20px; }
+        /* Navigasi Full Width */
+        nav { 
+            background: #000; 
+            height: 60px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0 20px; 
+            border-bottom: 2px solid var(--p);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { color: var(--p); font-weight: 900; font-size: 22px; text-decoration: none; text-shadow: 0 0 10px var(--p); }
+        .back { color: #fff; text-decoration: none; font-size: 12px; border: 1px solid var(--p); padding: 8px 15px; border-radius: 6px; background: rgba(188, 19, 254, 0.1); }
+
+        /* Container Full Layar */
+        .wrapper {
+            width: 100%;
+            min-height: calc(100vh - 60px);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card { 
+            width: 100%; 
+            max-width: 600px; 
+            background: var(--card); 
+            padding: 25px; 
+            border-radius: 15px; 
+            border: 1px solid #222; 
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+
+        /* Box Email Mewah */
+        .email-box { 
+            background: #000; 
+            border: 2px solid var(--p); 
+            padding: 20px; 
+            border-radius: 12px; 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            margin: 20px 0; 
+            color: #fff; 
+            cursor: pointer;
+            word-break: break-all;
+            transition: 0.3s;
+        }
+        .email-box:active { transform: scale(0.95); background: #0a0a0a; }
+
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .btn { 
+            border: none; 
+            padding: 15px; 
+            border-radius: 10px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 14px; 
+            transition: 0.2s;
+            color: #fff;
+        }
+        .btn-p { background: var(--p); }
+        .btn-s { background: #333; }
+        .btn:active { opacity: 0.8; }
+
+        /* Area Pesan Full Width */
+        .inbox-container { 
+            width: 100%; 
+            max-width: 600px; 
+            margin-top: 30px;
+        }
+        .inbox-header { 
+            font-size: 14px; 
+            font-weight: bold; 
+            color: var(--p); 
+            margin-bottom: 15px; 
+            padding-left: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .mail-card { 
+            background: #111; 
+            padding: 15px; 
+            border-radius: 12px; 
+            margin-bottom: 12px; 
+            border: 1px solid #222;
+            border-left: 4px solid var(--p);
+            animation: slideIn 0.3s ease-out;
+        }
+        .mail-from { font-size: 12px; color: var(--p); margin-bottom: 5px; }
+        .mail-sub { font-weight: bold; font-size: 16px; margin-bottom: 10px; }
+        .mail-body { 
+            background: #050505; 
+            padding: 12px; 
+            border-radius: 8px; 
+            font-size: 14px; 
+            line-height: 1.5;
+            color: #bbb;
+            border: 1px solid #1a1a1a;
+        }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
         
-        /* Grid Kartu */
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        
-        /* Wrapper Gambar - Biar Gak Pecah */
-        .img-container { width: 100%; height: 200px; background: #ddd; overflow: hidden; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
-
-        .card-body { padding: 20px; }
-        .card-body .tag { background: var(--p); color: white; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-        .card-body h3 { margin: 10px 0; font-size: 20px; }
-
-        /* Profil Penulis */
-        .author-box { background: var(--dark); color: white; padding: 30px; border-radius: 15px; margin-top: 40px; border-left: 6px solid var(--p); }
-        .author-box h2 { color: var(--p); margin-top: 0; }
-
-        footer { text-align: center; padding: 40px; color: #777; font-size: 13px; }
+        #loading-bar { display: none; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo">YUDA NEWS</div>
-    <div class="menu">
-        <a href="#">BERITA</a>
-        <a href="#">DESTINASI</a>
-    </div>
+    <a href="index.html" class="logo">YUDA TEMP MAIL</a>
+    <a href="index.html" class="back">KEMBALI</a>
 </nav>
 
-<header>
-    <h1>GARUT PRIDE 2026</h1>
-    <p>Portal Wisata Terupdate di Tarogong Kaler</p>
-</header>
-
-<div class="container">
-    <div class="news-grid">
-        <div class="card">
-            <div class="img-container">
-                <img src="https://picsum.photos/id/1016/800/500" alt="Talaga Bodas">
-            </div>
-            <div class="card-body">
-                <span class="tag">VIRAL</span>
-                <h3>Pesona Talaga Bodas</h3>
-                <p>Kawah putih nan cantik yang wajib dikunjungi warga Garut.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="img-container">
-                <img src="https://picsum.photos/id/1018/800/500" alt="Kebun Teh">
-            </div>
-            <div class="card-body">
-                <span class="tag">REKOMENDASI</span>
-                <h3>Segarnya Kebun Teh</h3>
-                <p>Hamparan hijau yang menyejukkan mata di lereng gunung Garut.</p>
-            </div>
+<div class="wrapper">
+    <div class="card">
+        <h2 style="margin:0; font-size: 1.4rem;">🛡️ Premium Account</h2>
+        <p style="color: #666; font-size: 13px; margin-top: 5px;">Klik alamat di bawah untuk salin otomatis</p>
+        
+        <div class="email-box" id="addr-text" onclick="copyEmail()">Memuat...</div>
+        
+        <div class="btn-group">
+            <button class="btn btn-p" onclick="createNew()">EMAIL BARU</button>
+            <button class="btn btn-s" onclick="checkMessages()">CEK OTP</button>
         </div>
     </div>
 
-    <div class="author-box">
-        <h2>Founder YUDA NEWS</h2>
-        <p>Saya **YUDA YUDIANSYAH**, pemuda asli **Tarogong Kaler**. Website ini adalah bukti kecintaan saya pada Garut. Mari majukan wisata lokal bersama!</p>
+    <div class="inbox-container">
+        <div class="inbox-header">
+            <span>KOTAK MASUK</span>
+            <span id="sync-status" style="font-weight: normal; color: #444;">Otomatis...</span>
+        </div>
+        <div id="mail-list">
+            <p style="text-align: center; color: #333; margin-top: 40px;">Belum ada OTP yang terdeteksi.</p>
+        </div>
     </div>
 </div>
 
-<footer>
-    <p>Dibuat oleh <strong>YUDA YUDIANSYAH ASAL GARUT</strong></p>
-    <p>&copy; 2026 - Terverifikasi Google Search Console</p>
-</footer>
+<script>
+    let token = ""; let address = "";
+
+    async function createNew() {
+        const textDisplay = document.getElementById('addr-text');
+        textDisplay.innerText = "Generating...";
+        try {
+            const domainRes = await fetch('https://api.mail.tm/domains');
+            const domainData = await domainRes.json();
+            const domain = domainData['hydra:member'][0].domain;
+            const user = `blakatak_${Math.random().toString(36).substring(2, 9)}`;
+            address = `${user}@${domain}`;
+            
+            await fetch('https://api.mail.tm/accounts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ address, password: user })
+            });
+
+            const tokenRes = await fetch('https://api.mail.tm/token', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ address, password: user })
+            });
+            const tokenData = await tokenRes.json();
+            token = tokenData.token;
+
+            textDisplay.innerText = address;
+            document.getElementById('mail-list').innerHTML = '<p style="text-align: center; color: #555; margin-top: 40px;">Email Aktif. Menunggu OTP...</p>';
+        } catch (e) { textDisplay.innerText = "berhasil"; }
+    }
+
+    async function checkMessages() {
+        if (!token) return;
+        document.getElementById('sync-status').innerText = "Mengecek...";
+        try {
+            const res = await fetch('https://api.mail.tm/messages', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await res.json();
+            const mails = data['hydra:member'];
+            if (mails.length > 0) {
+                let html = "";
+                for (let m of mails) {
+                    const msgRes = await fetch(`https://api.mail.tm/messages/${m.id}`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    const msg = await msgRes.json();
+                    html += `<div class="mail-card">
+                        <div class="mail-from">DARI: ${msg.from.address}</div>
+                        <div class="mail-sub">${msg.subject}</div>
+                        <div class="mail-body">${msg.intro || msg.text}</div>
+                    </div>`;
+                }
+                document.getElementById('mail-list').innerHTML = html;
+            }
+        } catch (e) { console.log("Cek gagal"); }
+        setTimeout(() => { document.getElementById('sync-status').innerText = "Otomatis..."; }, 1000);
+    }
+
+    function copyEmail() {
+        if(!address || address === "Memuat...") return;
+        navigator.clipboard.writeText(address);
+        alert("Email Tersalin!");
+    }
+
+    // Init
+    createNew();
+    setInterval(checkMessages, 5000); // Cek otomatis tiap 5 detik
+</script>
 
 </body>
 </html>
